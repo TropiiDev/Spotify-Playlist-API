@@ -33,7 +33,6 @@ def login():
     'response_type': 'code',
     'scope': scope,
     'redirect_uri': REDIRECT_URI,
-    'show_dialog': True
   }
 
   auth_url = f"{AUTH_URL}?{urllib.parse.urlencode(params)}"
@@ -72,7 +71,7 @@ def get_playlists():
     return redirect('/refresh-token')
 
   headers = {
-    'Authorization': f'Bearer {session['access_token']}'
+    'Authorization': f"Bearer {session['access_token']}"
   }
 
   response = requests.get(API_BASE_URL + 'me/playlists', headers=headers)
