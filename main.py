@@ -19,6 +19,10 @@ AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
 API_BASE_URL = 'https://api.spotify.com/v1/'
 
+@app.route('/')
+def home():
+  return "Welcome to the API. <a href='/login'>Login with spotify</a>"
+
 @app.route('/login')
 def login():
   scope = 'user-read-private user-read-email'
