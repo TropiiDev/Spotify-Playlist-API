@@ -109,7 +109,7 @@ def refresh_token():
     return redirect('/playlists')
 
 if __name__ == '__main__':
-  port = os.getenv('port')
+  port = os.getenv('PORT')
   if port is None:
     port = 8080
   app.run(host='0.0.0.0', debug=True, port=int(port))
