@@ -13,7 +13,7 @@ app.secret_key = os.getenv("secret_key")
 
 CLIENT_ID = os.getenv("spotify_client_id")
 CLIENT_SECRET = os.getenv("spotify_client_secret")
-REDIRECT_URI = 'http://localhost:8080/callback'
+REDIRECT_URI = 'https://api.tropii.xyz/callback'
 
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
