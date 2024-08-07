@@ -19,10 +19,6 @@ AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
 API_BASE_URL = 'https://api.spotify.com/v1/'
 
-@app.route('/')
-def home():
-  return "Welcome to the API. <a href='/login'>Login with spotify</a>"
-
 @app.route('/login')
 def login():
   scope = 'user-read-private user-read-email'
@@ -60,7 +56,11 @@ def callback():
     session['refresh_token'] = token_info['refresh_token']
     session['expires_at'] = datetime.now().timestamp() + token_info['expires_in']
 
-    return redirect('/playlists')
+    return jsonify({
+      "access_token": token_info['access_token'],
+      "refresh_token": token_info['refresh_token'],
+      "expires_at": datetime.now().timestamp() + token_info['expires_in']
+    })
 
 @app.route('/playlists')
 def get_playlists():
@@ -106,7 +106,10 @@ def refresh_token():
     session['access_token'] = new_token_info['access_token']
     session['expires_at'] = datetime.now().timestamp() + new_token_info['expires_in']
 
-    return redirect('/playlists')
+    return jsonify({
+      "access_token": new_token_info['access_token'],
+      "expires_at": datetime.now().timestamp() + new_token_info['expires_in']
+    })
 
 if __name__ == '__main__':
   port = os.getenv('PORT')
